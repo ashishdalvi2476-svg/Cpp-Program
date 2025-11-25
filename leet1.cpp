@@ -12,15 +12,16 @@ void found(int arr[], int n, int key){
 }
 
 int main(){
-    int arr[5], b;
+int n=5;
+    int arr[n], b;
 
     cout << "Enter Elements Of Array : " << endl;
-    for(int i = 0; i < 5; i++){
+    for(int i = 0; i < n; i++){
         cin >> arr[i];
     }
 
     cout << "Enter your target number : " << endl;
     cin >> b;
 
-    found(arr, 5, b);
+    found(arr, n, b);
 }
