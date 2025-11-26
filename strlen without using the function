@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+int len(char*arr){
+    int i;
+    while(arr[i]!='\0'){
+        i++;
+    }
+    return i;
+}
+int main()
+{
+    char arr[100];
+    cin.get(arr,100);
+    int a=len(arr);
+    cout<<" Length Is : "<<a;
+    
+}
