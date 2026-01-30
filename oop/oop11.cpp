@@ -4,7 +4,7 @@ using namespace std;
 class employee
 {
     int id;
-    static int count; // count is ststic data member in class
+    static int count; // count is static data member in class
 public:
     void getdata()
     {
@@ -40,4 +40,5 @@ int main()
     e3.display();
     e3.get();
     return 0;
+
 }
