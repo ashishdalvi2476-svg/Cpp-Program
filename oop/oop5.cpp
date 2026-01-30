@@ -12,7 +12,9 @@ class student{
     }
     student (student &s){
         this->name=s.name;
-        this->cgpaptr=s.cgpaptr;
+        // cgpaptr=new double;
+        // *cgpaptr =*(s.cgpaptr);    Deep Copy 
+        this->cgpaptr=s.cgpaptr;  // Shallow Copy
     }
     void getdata(){
         cout<<"name : "<<name<<endl;
@@ -29,4 +31,5 @@ student s2(s1);
 s1.getdata();
 s2.getdata();
 return 0;
+
 }
