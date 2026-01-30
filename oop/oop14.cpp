@@ -1,7 +1,5 @@
 #include<bits/stdc++.h>
 using namespace std;
-//4 + 4 = 8
-// c1+c2 -> then we need to overload this operator + 
 
 struct ytchannel {
     string name;
@@ -25,4 +23,5 @@ struct ytchannel yt2("om",90000);
 
 cout<<yt1<<yt2;
 return 0;
+
 }
