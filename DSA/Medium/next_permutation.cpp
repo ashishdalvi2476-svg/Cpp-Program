@@ -1,0 +1,31 @@
+#include <bits/stdc++.h> 
+vector<int> nextPermutation(vector<int> &permutation, int n)
+{
+
+    // breaking point where arr[i]<arr[i+1]
+    int idx=-1;
+    for(int i=n-2;i>=0;i--){
+      if(permutation[i]<permutation[i+1]){
+        idx=i;
+        break;
+      }
+    }
+
+    if(idx==-1){ 
+      reverse(permutation.begin(),permutation.end());
+      return permutation;
+       }
+
+    // for minimum among the maximum from idx to n-1
+    for(int i=n-1;i>=idx;i--){
+      if(permutation[i]>permutation[idx]){
+        swap(permutation[i],permutation[idx]);
+        break;
+      }
+    }
+
+    // reversing from idx+1 to n , to get the excat next permutation
+    reverse(permutation.begin()+idx+1,permutation.end());
+
+  return permutation;
+}
