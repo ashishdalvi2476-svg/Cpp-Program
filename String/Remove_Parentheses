@@ -1,0 +1,46 @@
+// Using Stack 
+
+class Solution {
+public:
+    string removeOuterParentheses(string s) {
+        stack<char> st;
+        string ans="";
+
+        for(char ch : s){
+            if(ch=='('){
+            if(!st.empty()){ ans+=ch; }
+             st.push(ch); 
+            }
+            else{
+               st.pop(); 
+                if(!st.empty()){ ans+=ch; }
+               
+            }
+        }
+
+        return ans;
+    }
+};
+
+// Using Counter Approach
+
+class Solution {
+public:
+    string removeOuterParentheses(string s) {
+      int cnt=0;
+      string ans="";
+
+      for(char ch:s){
+        if(ch=='('){
+            if(cnt>0){ ans+=ch; }
+            cnt++;
+        }
+        else{
+            cnt--;
+            if(cnt>0){ ans+=ch; }
+        }
+      }  
+
+      return ans;
+    }
+};
