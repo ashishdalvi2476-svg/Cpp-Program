@@ -1,0 +1,39 @@
+// Approach - I
+#include<bits/stdc++.h>
+int isCyclicRotation(string &p, string &q) 
+{
+        int n=p.size();
+        int m=q.size();
+
+        if(n!=m){ return 0; }
+
+
+        for(int i=0;i<n;i++){
+            rotate(p.begin(),p.begin()+1,p.end());
+
+            if(p==q){
+                return 1;
+            }
+        }
+
+        return 0;
+}
+
+
+// Approach - II
+
+#include<bits/stdc++.h>
+int isCyclicRotation(string &p, string &q) 
+{
+        int n=p.size();
+        int m=q.size();
+
+        if(n!=m){ return 0; }
+
+
+       if((p+p).find(q)!=string::npos){
+            return 1;
+        }
+
+        return 0;
+}
