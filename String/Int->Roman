@@ -1,0 +1,20 @@
+#include <bits/stdc++.h> 
+string intToRoman(int x) {
+    vector<int> num{1000,900,500,400,100,90,50,40,10,9,6,5,4,1};
+    vector<string> symbol{"M","CM","D","CD","C","XC","L","XL","X","IX","VI","V","IV","I"};
+
+    string ans="";
+    for(int i=0;i<num.size();i++){
+        if(num[i]<=x){
+        int temp=x/num[i];
+        while(temp--){
+        ans+=symbol[i];
+        }
+
+        x=x%num[i];
+        }
+    }
+
+    return ans;
+
+}
