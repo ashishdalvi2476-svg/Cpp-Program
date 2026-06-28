@@ -1,0 +1,37 @@
+int GetMax(int fre[]){
+	int maximum=0;
+	for(int i=0;i<26;i++){
+		if(fre[i]>maximum){
+			maximum=fre[i];
+		}
+	}
+
+	return maximum;
+}
+int GetMin(int fre[]){
+	int minimum=INT_MAX;
+	for(int i=0;i<26;i++){
+		if(fre[i]!=0){
+			minimum=min(minimum,fre[i]);
+		}
+	}
+
+	return minimum;
+}
+
+int sumOfBeauty(string s) {
+	int n=s.size();
+	int ans=0;
+
+	for(int i=0;i<n;i++){
+		int fre[26]={0};
+		for(int j=i;j<n;j++){
+			fre[s[j]-'a']++;
+
+			int beauty=GetMax(fre)-GetMin(fre);
+			ans+=beauty;
+		}
+	}
+
+	return ans;
+}
