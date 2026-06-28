@@ -1,0 +1,41 @@
+string longestPalinSubstring(string str) {
+   string ans="";
+   int n=str.size();
+
+   if(n<=1){ return str; }
+
+   for(int i=1;i<n;i++){
+       // For Odd Length SubString
+       int low=i,high=i;
+
+       while(str[low]==str[high]){
+           low--;
+           high++;
+
+           if(low==-1 || high==str.size()){
+               break;
+           }
+       }
+
+       string temp=str.substr(low+1,(high-low-1));
+       if(temp.size()>ans.size()){ ans=temp; }
+       
+       // For Even Length SubString
+        low=i-1,high=i;
+
+       while(str[low]==str[high]){
+           low--;
+           high++;
+
+           if(low==-1 || high==str.size()){
+               break;
+           }
+       }
+
+        temp=str.substr(low+1,(high-low-1));
+       if(temp.size()>ans.size()){ ans=temp; }
+
+
+   }
+    return ans;
+}
