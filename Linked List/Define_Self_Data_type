@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std;
+class Node{
+    public:
+    int data;
+    Node* next;
+
+    Node(int data1,Node* next1){
+        data=data1;
+        next=next1;
+    }
+};
+int main()
+{
+    // 1st Way to Use
+    // Node x=Node(2,nullptr);
+    // Node *y=&x;
+    // cout<<y;
+    
+    // 2nd Way to Use
+    Node *y=new Node(2,nullptr);
+    cout<<y;
+
+return 0;
+}
