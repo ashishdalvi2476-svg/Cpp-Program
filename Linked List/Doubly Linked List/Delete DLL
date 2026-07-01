@@ -79,40 +79,51 @@ Node * Delete_Tail(Node * head) {
 
 }
 
-Node* Delete_At_Idx(Node* head,int k){
-    
-    Node* temp1=head;
-    int cnt=0;
-    while(temp1!=NULL){
+Node * Delete_At_Idx(Node * head, int k) {
+
+    Node * temp1 = head;
+    int cnt = 0;
+    while (temp1 != NULL) {
         cnt++;
-        if(cnt==k){ break; }
-        
-        temp1=temp1->next;
+        if (cnt == k) {
+            break;
+        }
+
+        temp1 = temp1 -> next;
     }
-    
-    Node* previous=temp1->back;
-    Node* front=temp1->next;
-    
-    if(previous==NULL){
+
+    Node * previous = temp1 -> back;
+    Node * front = temp1 -> next;
+
+    if (previous == NULL) {
         return Delete_Head(head);
     }
-    else if(front==NULL){
+    else if (front == NULL) {
         return Delete_Tail(head);
     }
-    else if(previous==NULL && front==NULL){
+    else if (previous == NULL && front == NULL) {
         delete head;
         return NULL;
     }
-    else{
-        previous->next=front;
-        front->back=previous;
+    else {
+        previous -> next = front;
+        front -> back = previous;
+
+        temp1 -> next = nullptr;
+        temp1 -> back = nullptr;
+        delete temp1;
     }
-    
+
     return head;
 }
 
 int main() {
-    vector < int > arr {1,2,3,4};
+    vector < int > arr {
+        1,
+        2,
+        3,
+        4
+    };
 
     Node * head = Convert_Arr_To_DLL(arr);
 
@@ -123,10 +134,10 @@ int main() {
     // Delete Tail
     // head = Delete_Tail(head);
     // Print_DLL(head);
-    
+
     // Delete At Idx
-     head = Delete_At_Idx(head,3);
+    head = Delete_At_Idx(head, 3);
     Print_DLL(head);
-    
+
 
 }
