@@ -117,13 +117,28 @@ Node * Delete_At_Idx(Node * head, int k) {
     return head;
 }
 
+void Delete_Node(Node* temp){
+    Node* prev=temp->back;
+    Node* front=temp->next;
+    
+    if(front==NULL){
+        temp->back=nullptr;
+        front->next=nullptr;
+        delete temp;
+        return;
+    }
+    
+    prev->next=front;
+    front->back=prev;
+    temp->next=nullptr;
+    temp->back=nullptr;
+    delete temp;
+    
+    return;
+}
+
 int main() {
-    vector < int > arr {
-        1,
-        2,
-        3,
-        4
-    };
+    vector < int > arr {1,2, 3,4};
 
     Node * head = Convert_Arr_To_DLL(arr);
 
@@ -136,7 +151,11 @@ int main() {
     // Print_DLL(head);
 
     // Delete At Idx
-    head = Delete_At_Idx(head, 3);
+    // head = Delete_At_Idx(head, 3);
+    // Print_DLL(head);
+    
+    // Delete a Node
+    Delete_Node(head->next->next);
     Print_DLL(head);
 
 
