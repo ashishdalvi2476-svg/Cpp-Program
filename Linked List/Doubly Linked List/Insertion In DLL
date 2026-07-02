@@ -1,0 +1,122 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Node {
+    public: int data;
+    Node * next;
+    Node * back;
+
+    Node(int data1, Node * next1, Node * back1) {
+        data = data1;
+        next = next1;
+        back = back1;
+    }
+    Node(int data1) {
+        data = data1;
+        next = nullptr;
+        back = nullptr;
+    }
+};
+
+void Print_DLL(Node * head) {
+    Node * temp = head;
+
+    while (temp != NULL) {
+        cout << temp -> data << " ";
+        temp = temp -> next;
+    }
+}
+
+Node * Convert_Arr_To_DLL(vector < int > arr) {
+    Node * head = new Node(arr[0]);
+    Node * prev = head;
+
+    for (int i = 1; i < arr.size(); i++) {
+        Node * temp = new Node(arr[i]);
+        temp -> back = prev;
+        prev -> next = temp;
+
+        prev = temp;
+    }
+
+    return head;
+}
+
+Node* Insert_Before_Head(Node* head,int val){
+    Node* temp=new Node(val,head,nullptr);
+    head->back=temp;
+    
+    return temp;
+}
+
+Node* Insert_Before_Tail(Node* head,int val){
+    
+    Node* temp=head;
+    while(temp->next!=nullptr){
+        temp=temp->next;
+    }
+    
+    Node* prev=temp->back;
+    
+    Node* NewNode=new Node(val,temp,prev);
+    prev->next=NewNode;
+    temp->back=NewNode;
+    
+    return head;
+}
+
+Node* Insert_Before_Idx(Node* head,int idx,int val){
+    if(idx==1){
+        Node* temp=new Node(val,head,nullptr);
+    head->back=temp;
+    
+    return temp;
+    }
+    
+    int cnt=0;
+    Node* temp=head;
+    while(temp->next!=nullptr){
+        cnt++;
+        if(cnt==idx){ 
+         break;
+        }
+        temp=temp->next;
+    }
+    
+    Node* prev=temp->back;
+    Node* x=new Node(val,temp,prev);
+         prev->next=x;
+         temp->back=x;
+         
+         return head;
+    
+}
+
+void Insert_Before_Node(Node* node,int val){
+    Node* prev=node->back;
+    Node* temp=new Node(val,node,prev);
+    prev->next=temp;
+    node->back=temp;
+}
+
+int main() {
+	
+	 vector < int > arr {1,2, 3,4};
+
+    Node * head = Convert_Arr_To_DLL(arr);
+    
+    // Insert Before Head
+    // head=Insert_Before_Head(head,89);
+    // Print_DLL(head);
+    
+     // Insert Before Tail
+    // head=Insert_Before_Tail(head,89);
+    // Print_DLL(head);
+    
+     // Insert Before Idx
+    // head=Insert_Before_Idx(head,4,90);
+    // Print_DLL(head);
+    
+    // Insert Before Node
+    Insert_Before_Node(head->next,89);
+    Print_DLL(head);
+}
