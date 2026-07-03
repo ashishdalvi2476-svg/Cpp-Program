@@ -1,0 +1,42 @@
+// Brute Force Approach
+
+
+Node* reverseDLL(Node* head)
+{   
+    stack<int> st;
+    Node* temp=head;
+    while(temp!=NULL){
+        st.push(temp->data);
+        temp=temp->next;
+    }   
+
+    temp=head;
+    while(temp!=NULL){
+        temp->data=st.top();
+        st.pop();
+        temp=temp->next;
+    }
+
+    return head;
+}
+
+
+
+// Optimal Approach
+
+Node* reverseDLL(Node* head)
+{   
+    if(head->next==nullptr){
+        return head;
+    }
+     Node* last=NULL;
+     Node* temp=head;
+     while(temp!=NULL){
+         last=temp->prev;
+         temp->prev=temp->next;
+         temp->next=last;
+         temp=temp->prev;
+     }  
+
+     return last->prev;
+}
