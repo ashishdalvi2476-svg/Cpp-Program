@@ -20,3 +20,27 @@ int subarraysXor(vector<int> &arr, int x)
 }
 
 // Optimal Approach
+
+#include <bits/stdc++.h>
+
+int subarraysXor(vector<int> &arr, int y)
+{
+   int cnt=0;
+   int n=arr.size();
+   unordered_map<int,int> mpp;
+   mpp[0]=1;
+
+   int xr=0;
+   for(int i=0;i<n;i++){
+      xr^=arr[i];
+
+      int x=xr^y;
+      if(mpp.find(x)!=mpp.end()){
+         cnt+=mpp[x];
+      }
+
+      mpp[xr]+=1;
+   }
+
+   return cnt;
+}
