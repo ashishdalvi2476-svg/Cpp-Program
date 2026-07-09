@@ -1,0 +1,84 @@
+// Brute Force
+
+/*
+class Node {
+ public:
+    int data;
+    Node *next;
+
+    Node(int x) {
+        data = x;
+        next = NULL;
+    }
+};
+*/
+
+class Solution {
+  public:
+    int lengthOfLoop(Node *head) {
+       int len=0;
+       unordered_map<Node*,int> mpp;
+       
+       Node* temp=head;
+       int timer=1;
+       while(temp!=NULL){
+           if(mpp.find(temp)!=mpp.end()){
+              len=timer-mpp[temp];
+              break;
+           }
+           
+           mpp[temp]=timer;
+           ++timer;
+           temp=temp->next;
+       }
+       
+       return len;
+    }
+};
+
+// optimal Solution
+
+/*
+class Node {
+ public:
+    int data;
+    Node *next;
+
+    Node(int x) {
+        data = x;
+        next = NULL;
+    }
+};
+*/
+
+class Solution {
+  public:
+  
+    int Length(Node* slow,Node* fast){
+        int cnt=1;
+        fast=fast->next;
+        
+        while(slow!=fast){
+            ++cnt;
+            fast=fast->next;
+        }
+        
+        return cnt;
+    }
+    
+    int lengthOfLoop(Node *head) {
+        Node* slow=head;
+        Node* fast=head;
+        
+        while(fast!=NULL && fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+            
+            if(slow==fast){
+                return Length(slow,fast);
+            }
+        }
+        
+        return 0;
+    }
+};
