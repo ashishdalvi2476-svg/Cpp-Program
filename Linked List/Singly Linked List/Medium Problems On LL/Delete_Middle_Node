@@ -1,0 +1,80 @@
+// Brute Force
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* deleteMiddle(ListNode* head) {
+        if(head==NULL || head->next==NULL){
+            return NULL;
+        }
+        ListNode* temp=head;
+        int len=0;
+
+        while(temp!=NULL){
+            len++;
+            temp=temp->next;
+        }
+
+        int mid_prev=len/2;
+        temp=head;
+        while(temp!=NULL){
+            --mid_prev;
+
+            if(mid_prev==0 && temp->next!=NULL){
+                ListNode* delNode=temp->next;
+                temp->next=temp->next->next;
+                delete delNode;
+                break;
+            }
+
+            temp=temp->next;
+        }
+
+        return head;
+    }
+};
+
+// Optimal approach
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* deleteMiddle(ListNode* head) {
+        if(head==NULL || head->next==NULL){
+            return NULL;
+        }
+        ListNode* slow=head;
+        ListNode* fast=head;
+
+        fast=fast->next->next;
+        while(fast!=NULL && fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+
+        ListNode* delNode=slow->next;
+        slow->next=slow->next->next;
+        delete delNode;
+        
+
+        return head;
+    }
+};
