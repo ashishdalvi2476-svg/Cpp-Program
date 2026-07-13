@@ -19,7 +19,7 @@ vector<int> findRepeatingAndMissingNumbers(vector<int> nums)
    return {repeat,miss};
 }
 
-// Better force
+// Better approach
 
 vector<int> findRepeatingAndMissingNumbers(vector<int> nums)
 {
@@ -42,4 +42,39 @@ vector<int> findRepeatingAndMissingNumbers(vector<int> nums)
    }
 
    return {repeating,missing};
+}
+
+// Optimal Approach - I(Using Basic Math)
+
+vector<int> findRepeatingAndMissingNumbers(vector<int> nums)
+{
+
+    // will be using simple maths 
+    // we should know sum of n natural no. & sum of squares of n natural no.
+   long long n=nums.size();
+   
+   long long Sn=(n*(n+1)/2);
+   long long S2n=(n*(n+1)*((2*n)+1))/6;
+   long long S1=0,S2=0;
+
+    // calculating the sum of array ele & sum of square of array ele
+   for(int i=0;i<n;i++){
+       S1+=nums[i];
+       long long temp=((long long)nums[i])*((long long)nums[i]);
+       S2+=temp;
+   }
+
+   // X-Y : x-> repeating , y-> missing
+   long long val1=S1-Sn;
+
+   // X^2-Y^2
+   long long val2=S2-S2n;
+
+   // Converting into X+Y 
+   val2=val2/val1;
+
+   long long x=(val1+val2)/2;
+   long long y=val2-x;
+
+   return {(int)x,(int)y};
 }
