@@ -1,0 +1,67 @@
+// Brute Force 
+
+#include <bits/stdc++.h>
+
+/************************************************************
+
+    Following is the linked list node structure.
+    
+    template <typename T>
+    class Node {
+        public:
+        T data;
+        Node* next;
+
+        Node(T data) {
+            next = NULL;
+            this->data = data;
+        }
+
+        ~Node() {
+            if (next != NULL) {
+                delete next;
+            }
+        }
+    };
+
+************************************************************/
+
+Node<int>* Convert(vector<int> arr){
+    if(arr.empty()){ return NULL; }
+
+    Node<int>* head=new Node(arr[0]);
+    Node<int>* prev=head;
+
+    for(int i=1;i<arr.size();i++){
+        Node<int>* temp=new Node(arr[i]);
+        prev->next=temp;
+        prev=temp;
+    }
+
+    return head;
+}
+
+Node<int>* sortTwoLists(Node<int>* first, Node<int>* second)
+{
+    Node<int>* temp1=first;
+    Node<int>* temp2=second;
+
+    vector<int> ans;
+
+    while(temp1!=NULL){
+        ans.push_back(temp1->data);
+        temp1=temp1->next;
+    }
+
+    while(temp2!=NULL){
+        ans.push_back(temp2->data);
+        temp2=temp2->next;
+    }
+
+    sort(ans.begin(),ans.end());
+
+    Node<int>* newHead=Convert(ans);
+
+    return newHead;
+
+}
