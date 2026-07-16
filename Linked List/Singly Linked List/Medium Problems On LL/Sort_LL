@@ -1,0 +1,125 @@
+// Brute Force
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* sortList(ListNode* head) {
+        ListNode* temp=head;
+        vector<int> ans;
+
+        // Storing the LL element in set
+        while(temp!=NULL){
+            ans.push_back(temp->val);
+            temp=temp->next;
+        }
+
+        // sort the vector
+        sort(ans.begin(),ans.end());
+
+        // Restoring it in sorted order
+        temp=head;
+        int i=0;
+        while(temp!=NULL){
+            temp->val=ans[i];
+            temp=temp->next;
+            i++;
+        }
+
+        return head;
+    }
+};
+
+// Optimal Approach
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+
+    ListNode* Merge(ListNode* l1,ListNode* l2){
+        if(l1==NULL && l2==NULL){
+            return NULL;
+        }
+
+        ListNode* temp1=l1;
+        ListNode* temp2=l2;
+        ListNode* dummy=new ListNode(-1);
+        ListNode* curr=dummy;
+
+        while(temp1!=NULL && temp2!=NULL){
+            ListNode* temp=NULL;
+            if((temp1->val)<=(temp2->val)){
+                temp=new ListNode(temp1->val);
+                curr->next=temp;
+                curr=temp;
+
+                if(temp1){ temp1=temp1->next; }
+            }
+            else{
+                temp=new ListNode(temp2->val);
+                curr->next=temp;
+                curr=temp;
+
+                if(temp2){ temp2=temp2->next; }
+            }
+        }
+
+        if(temp1){
+            curr->next=temp1;
+        }
+        if(temp2){
+            curr->next=temp2;
+        }
+
+        return dummy->next;
+    }
+
+    ListNode* FindMiddle(ListNode* head){
+        ListNode* slow=head;
+        ListNode* fast=head;
+        fast=fast->next;
+
+        while(fast!=NULL && fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+
+        return slow;
+    }
+    ListNode* sortList(ListNode* head) {
+        // Using Merge Sort For LL
+        if(head==NULL || head->next==NULL){
+            return head;
+        }
+
+        // Finding The Middle & dividing it
+        ListNode* middle=FindMiddle(head);
+
+        // Merging The Divided LL into Sorted LL 
+        ListNode* left=head;
+        ListNode* right=middle->next;
+        middle->next=NULL;
+
+        left=sortList(left);
+        right=sortList(right);
+
+        return Merge(left,right);
+    }
+};
