@@ -65,3 +65,74 @@ Node* sortList(Node *head){
     return head;
 }
 
+// Optimal Approach
+
+/*
+Following is the class structure of the Node class:
+
+class Node
+{
+public:
+    int data;
+    Node *next;
+    Node()
+    {
+        this->data = 0;
+        next = NULL;
+    }
+    Node(int data)
+    {
+        this->data = data; 
+        this->next = NULL;
+    }
+    Node(int data, Node* next)
+    {
+        this->data = data;
+        this->next = next;
+    }
+};
+*/
+
+Node* sortList(Node *head){
+
+    if(head==NULL || head->next==NULL){
+        return head;
+    }
+
+    Node* temp=head;
+
+    // Making Dummy Node's For Getting 0,1,2
+    Node* ZeroHead=new Node(-1);
+    Node* OneHead=new Node(-1);
+    Node* TwoHead=new Node(-1);
+
+    Node* Zero=ZeroHead;
+    Node* One=OneHead;
+    Node* Two=TwoHead;
+
+    while(temp!=NULL){
+        if(temp->data==0){
+            Zero->next=temp;
+            Zero=temp;
+        }
+        else if(temp->data==1){
+            One->next=temp;
+            One=temp;
+        }
+        else{
+            Two->next=temp;
+            Two=temp;
+        }
+
+        temp=temp->next;
+    }
+
+    // Mark Their Position Accordingly
+    Zero->next=(OneHead->next) ? OneHead->next:TwoHead->next;
+    One->next=TwoHead->next;
+    Two->next=NULL;
+
+    Node* NewHead=ZeroHead->next;
+
+    return NewHead;
+}
