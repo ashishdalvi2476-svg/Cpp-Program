@@ -1,0 +1,57 @@
+/**
+ * Definition of doubly linked list:
+ *
+ * class Node {
+ * public:
+ *      int data;
+ *      Node *prev;
+ *      Node *next;
+ *      Node() {
+ *          this->data = 0;
+ *          this->prev = NULL;
+ *          this->next = NULL;
+ *      }
+ *      Node(int data) {
+ *          this->data = data;
+ *          this->prev = NULL;
+ *          this->next = NULL;
+ *      }
+ *      Node (int data, Node *next, Node *prev) {
+ *          this->data = data;
+ *          this->prev = prev;
+ *          this->next = next;
+ *      }
+ * };
+ *
+ *************************************************************************/
+
+Node * deleteAllOccurrences(Node* head, int k) {
+   Node* temp=head;
+
+   while(temp!=NULL){
+       if(temp->data==k){
+           if(temp==head){ head=head->next; }
+
+           Node* front=temp->next;
+           Node* back=temp->prev;
+
+           if(front != NULL){ front->prev=back; }
+           if(back != NULL){ back->next=front; }
+
+        //    temp->prev = temp->next = NULL;
+
+           free(temp);
+           temp=front;
+       }
+
+       else{
+           temp=temp->next;
+       }
+
+   }
+
+   return head;
+}
+
+
+** Mistake : Head Ko delete nahi karna hai , agar key head pe ho to just shift the head & write the code for the rest 
