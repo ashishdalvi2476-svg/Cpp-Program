@@ -1,0 +1,115 @@
+// Brute Force
+
+#include<bits/stdc++.h>
+/**
+ * Definition of doubly linked list:
+ * class Node {
+ * public:
+ *      int data;
+ *      Node *prev;
+ *      Node *next;
+ *      Node() {
+ *          this->data = 0;
+ *          this->prev = NULL;
+ *          this->next = NULL;
+ *      }
+ *      Node(int data) {
+ *          this->data = data;
+ *          this->prev = NULL;
+ *          this->next = NULL;
+ *      }
+ *      Node (int data, Node *next, Node *prev) {
+ *          this->data = data;
+ *          this->prev = prev;
+ *          this->next = next;
+ *      }
+ * };
+ *
+ *************************************************************************/
+
+Node * removeDuplicates(Node *head)
+{
+    if(head->next==NULL || head==NULL){
+        return head;
+    }
+   set<int> st;
+   Node* temp=head;
+   while(temp!=NULL){
+       st.insert(temp->data);
+       temp=temp->next;
+   }
+
+   temp=head;
+   for(auto it:st){
+       if(temp==NULL){ break; }
+           temp->data=it;
+           temp=temp->next;
+   }
+
+    if(temp!=NULL){
+   Node* back=temp->prev;
+   back->next=NULL;
+   temp->prev=NULL;
+    }
+
+   return head;
+}
+
+// Optimal Approach
+
+#include<bits/stdc++.h>
+/**
+ * Definition of doubly linked list:
+ * class Node {
+ * public:
+ *      int data;
+ *      Node *prev;
+ *      Node *next;
+ *      Node() {
+ *          this->data = 0;
+ *          this->prev = NULL;
+ *          this->next = NULL;
+ *      }
+ *      Node(int data) {
+ *          this->data = data;
+ *          this->prev = NULL;
+ *          this->next = NULL;
+ *      }
+ *      Node (int data, Node *next, Node *prev) {
+ *          this->data = data;
+ *          this->prev = prev;
+ *          this->next = next;
+ *      }
+ * };
+ *
+ *************************************************************************/
+
+Node * removeDuplicates(Node *head)
+{
+    if(head->next==NULL || head==NULL){
+        return head;
+    }
+    Node* back=NULL;
+   Node* temp=head;
+    Node* front=NULL;
+   while(temp->next!=NULL){
+       front=temp->next;
+       if(temp->data==front->data){
+           if(temp==head){ head=head->next; continue; }
+           back=temp->prev;
+            if(back!=NULL){
+                back->next=front;
+            }
+            if(front!=NULL){
+                front->prev=back;
+            }
+            temp->prev = temp->next = NULL;
+            delete temp;
+       }
+       temp=front;
+   }
+
+
+   return head;
+}
+
