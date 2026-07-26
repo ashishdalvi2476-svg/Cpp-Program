@@ -1,0 +1,103 @@
+// Brute force
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    int Length(ListNode* head){
+        ListNode* temp=head;
+        int cnt=0;
+        while(temp!=NULL){
+            ++cnt;
+            temp=temp->next;
+        }
+
+        return cnt;
+    }
+    ListNode* rotateRight(ListNode* head, int k) {
+        if(head==NULL || head->next==NULL){
+            return head;
+        }
+        int cnt=Length(head);
+        k=k%cnt;
+
+        ListNode* temp=head;
+        ListNode* last=NULL;
+        ListNode* NewHead=NULL;
+
+        while(k--){
+
+            // Finding Last
+            while(temp->next->next!=NULL){
+                temp=temp->next;
+            }
+            last=temp->next;
+            temp->next=NULL;
+
+            // Creating New Node
+             NewHead=new ListNode(last->val);
+            NewHead->next=head;
+            head=NewHead;
+            temp=NewHead;
+        }
+
+        return head;
+    }
+};
+
+// Optimal Approach
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+        if (head == NULL || head->next == NULL) {
+            return head;
+        }
+
+        ListNode* temp = head;
+        ListNode* last = NULL;
+        int cnt = 0;
+
+        while (temp != NULL) {
+            ++cnt;
+            if (temp->next == NULL) {
+                last = temp;
+            }
+            temp = temp->next;
+        }
+
+        k = k % cnt;
+        int move = cnt - k-1;
+        last->next = head;
+
+        temp = head;
+        while (temp != NULL) {
+            if (move == 0) {
+                break;
+            }
+            --move;
+            temp = temp->next;
+        }
+        head = temp->next;
+        temp->next = NULL;
+        return head;
+    }
+};
