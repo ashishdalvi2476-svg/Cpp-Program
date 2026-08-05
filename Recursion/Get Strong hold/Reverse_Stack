@@ -1,0 +1,22 @@
+void Insert_Bottom(stack<int>& st,int x){
+    if(st.empty()){
+        st.push(x);
+        return;
+    }
+
+    int val=st.top();
+    st.pop();
+    Insert_Bottom(st,x);
+    st.push(val);
+}
+
+void reverseStack(stack<int> &stack) {
+    if(stack.empty()){
+        return;
+    }
+
+    int val=stack.top();
+    stack.pop();
+    reverseStack(stack);
+    Insert_Bottom(stack,val);
+}
