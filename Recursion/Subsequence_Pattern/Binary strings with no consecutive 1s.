@@ -1,0 +1,21 @@
+void Generate(vector<string>& ans,int n,int last,string s){
+    if(s.size()==n){
+        ans.push_back(s);
+        s="";
+        return;
+    }
+
+    Generate(ans,n,0,s+"0");
+    if(last==0 || last==-1){
+        Generate(ans,n,1,s+"1");
+    }
+
+}
+
+vector<string> generateString(int N) {
+   vector<string> ans;
+
+   Generate(ans,N,-1,"");
+
+   return ans; 
+}
