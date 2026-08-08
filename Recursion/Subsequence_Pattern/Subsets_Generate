@@ -1,0 +1,25 @@
+// Recursive Solution
+
+class Solution {
+public:
+
+    void Generate_Subset(vector<vector<int>>& ans,int idx,vector<int> temp,int n,vector<int> nums){
+        if(idx>=n){
+            ans.push_back(temp);
+            return;
+        }
+
+        temp.push_back(nums[idx]);
+        Generate_Subset(ans,idx+1,temp,n,nums);
+        temp.pop_back();
+        Generate_Subset(ans,idx+1,temp,n,nums);
+
+        return;
+    }
+    vector<vector<int>> subsets(vector<int>& nums) {
+       vector<vector<int>> ans;
+       vector<int> temp;
+        Generate_Subset(ans,0,temp,nums.size(),nums);
+       return ans;
+    }
+};
