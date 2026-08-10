@@ -1,0 +1,24 @@
+#include <bits/stdc++.h> 
+bool Check_if_Exist(int n,int k,vector<int> arr,vector<int> temp,int idx,int sum){
+    if(idx>=n){
+        if(sum==k){
+            return true;
+        }
+        return false;
+    }
+
+    temp.push_back(arr[idx]);
+    sum+=arr[idx];
+    if(Check_if_Exist(n,k,arr,temp,idx+1,sum)==true) return true;
+    sum-=arr[idx];
+    temp.pop_back();
+    if(Check_if_Exist(n,k,arr,temp,idx+1,sum)==true) return true;
+
+    return false;
+}
+bool subsetSumToK(int n, int k, vector<int> &arr) {
+    vector<int> temp;
+    bool ans=Check_if_Exist(n,k,arr,temp,0,0);
+
+    return ans;
+}
